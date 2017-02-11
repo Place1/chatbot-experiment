@@ -37,7 +37,7 @@
 	"message": "create a new project called 'Inspire 81'",
 	"intent": "create project",
 	"data": {
-		"name": "Inspire 81"
+		"projectName": "Inspire 81"
 	}
 }
 ```
@@ -45,11 +45,11 @@
 ```javascript
 // pseudocode
 function createProjectAction(parsedMessage) {
-	if (parsedMessage.data.name !== undefined) {
-		createProjectWithName(parsedMessage.data.name);
+	if (parsedMessage.data.projectName !== undefined) {
+		createProjectWithName(parsedMessage.data.projectName);
 		return new Response('success');
 	}
-	return new Response('information required', 'name');
+	return new Response('information required', 'projectName');
 }
 ```
 
