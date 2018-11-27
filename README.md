@@ -16,43 +16,11 @@
 	- Handles the result of a specific 'Action' by creating a human friendy response
 	- The responder is the part of the system that will send a message back to the user
 
-# Flow of a message
-1. Hubot framework accepts the message via the adapter.
-2. Framework sends the message through the middleware stack.
-3. **Session Management** (a middleware) persists the message as part of the current conversation.
-4. **Parser** (a middleware) tags the intent as best it can.
-5. Framework finds the **Action** matching the intent and calls it, passing the message.
-6. The result of the Action is passed into the correct **Responder** which sends a reply to the user.
+---
 
-# Terms **TODO**
-* Conversation
-* Intent
-
-# Complex example
-**User**: "create a new project called 'Inspire 81'"
-
-*Parser*: 	
-```json
-{
-	"message": "create a new project called 'Inspire 81'",
-	"intent": "create project",
-	"data": {
-		"projectName": "Inspire 81"
-	}
-}
-```
-*Action*:
-```javascript
-// pseudocode
-function createProjectAction(parsedMessage) {
-	if (parsedMessage.data.projectName !== undefined) {
-		createProjectWithName(parsedMessage.data.projectName);
-		return new Response('success');
-	}
-	return new Response('information required', 'projectName');
-}
-```
-
-*Response*: "The project 'Inspire 81' was successfully created 😀!"
-
-**ChatBot**: <Response>
+* the bot does something by running a Action with can take required/optional parameters (like a CLI command)
+* the bot tries to:
+	1. identify the users goal for the conversation (which Action they want to run)
+	2. gather the required/optional parameters, perhaps suggesting what they are to inform the user
+	3. pass the information to the Action to be run.
+	4. relay the result of the Action back to the user
